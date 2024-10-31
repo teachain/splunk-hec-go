@@ -3,12 +3,11 @@ package hec
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/google/uuid"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"time"
-
-	"github.com/satori/go.uuid"
 )
 
 const (
@@ -43,10 +42,7 @@ type Client struct {
 }
 
 func NewClient(serverURL string, token string) HEC {
-	id, err := uuid.NewV4()
-	if err != nil {
-		panic(err)
-	}
+	id := uuid.New()
 	return &Client{
 		httpClient: http.DefaultClient,
 		serverURL:  serverURL,
